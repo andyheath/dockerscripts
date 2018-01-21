@@ -6,10 +6,12 @@
 # author Andy Heath axelafa.com, devethic.com dev@axelafa.com
 # use as you wish. No guarantees
 
-# change these to be whatever columns you want - see key in Usage
+# order of options determines order of columns
+
+# change these to be whatever columns you want in whatever order you want - see key in Usage
 defaultoptions="-iIcspn"
 
-# delete the -s if you only want running containers
+# delete the -a if you only want running containers
 dockercmd="ps -a"
 
 
@@ -54,19 +56,10 @@ while getopts ":hiIcCL:lmnNprSs" opt; do
   field=""
   case $opt in
     h) Usage ; exit 1 ;;
-    i) field=ID ;;
-    I) field=Image ;;
-    c) field=Command ;;
-    C) field=CreatedAt ;;
+    i) field=ID ;; I) field=Image ;; c) field=Command ;; C) field=CreatedAt ;;
     L) field=Label\ \"$OPTARG\" ;;
-    l) field=Labels ;;
-    m) field=Mounts ;;
-    n) field=Names ;;
-    N) field=Networks ;;
-    p) field=Ports ;;
-    r) field=RunningFor ;;
-    S) field=Size ;;
-    s) field=Status ;;
+    l) field=Labels ;; m) field=Mounts ;; n) field=Names ;; N) field=Networks ;;
+    p) field=Ports ;; r) field=RunningFor ;; S) field=Size ;; s) field=Status ;;
     \?) echo "Invalid option: -$OPTARG"; Usage; exit 1 ;;
     :) echo "Option -$OPTARG requires an argument."; Usage ; exit 1 ;;
   esac
